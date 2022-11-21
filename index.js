@@ -1,12 +1,27 @@
 import express from 'express'
 import usuarioRoutes from './routes/usuarioRoutes.js'
+import db from './config/db.js'
 
 // Crear la app
-
 const app = express()
 
+//Conexion a la bse de datos
+try {
+    await db.authenticate();
+    console.log('Conexion correcta a la Base de Datos')
+} catch (error) {
+    console.log(error)
+}
+
 // Routing
-app.use('/', usuarioRoutes)
+app.use('/auth', usuarioRoutes)
+
+//Hablitar pug
+app.set('view engine', 'pug')
+app.set('views', './view')
+
+//Carpeta publica
+app.use( express.static('public'))
 
 // Definir un puerto y arrancar el proyecto
 const port = 3000;
