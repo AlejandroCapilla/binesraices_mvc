@@ -1,17 +1,21 @@
-import { Datatypes } from "squelize";
-import db from "../config/db.js";
+import { DataTypes } from 'sequelize';
+import db from '../config/db.js';
 
 const Usuario = db.define('usuarios', {
     nombre: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     email: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     password: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    token: DataTypes.STRING,
+    confirmado: DataTypes.BOOLEAN
 })
+
+export default Usuario;
