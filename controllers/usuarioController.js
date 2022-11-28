@@ -27,6 +27,17 @@ const autenticar = async (req, res) => {
         })  
     }
 
+
+    const {email,password} = req.body;
+    //comprobar si el usuario existe
+    const usuario = await usuario.findOne({where: { email}})
+    if(!usuario){
+        return res.render('auth/login',{
+            pagina: 'Iniciar Sesion',
+            csrfToken: req.csrfToken(),
+            errores: [{msg: 'El usuario no existe'}]
+        })
+    }
  
 } 
 
