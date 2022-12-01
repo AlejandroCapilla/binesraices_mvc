@@ -34,13 +34,23 @@ const autenticar = async (req, res) => {
     if(!usuario){
         return res.render('auth/login',{
             pagina: 'Iniciar Sesion',
-            csrfToken: req.csrfToken(),
-            errores: [{msg: 'El usuario no existe'}]
+            errores: [{msg: 'El usuario No existe'}]
         })
     }
+
+    //Comprobar si el usuario esta confirmado
+    if(!usuario.confirmado){
+        return res.render('auth/login',{
+            pagina: 'Iniciar Sesion',
+            csrfToken: req.csrfToken(),
+            errores: [{msg: 'Tu cuenta no a sido confirmada'}]
+
+    })
  
 } 
+//comprobar el password
 
+}
 const formularioRegistro = (req, res) => {  
     res.render('auth/registro',{
         pagina: 'Crear Cuenta'
