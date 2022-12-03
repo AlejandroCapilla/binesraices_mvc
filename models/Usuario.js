@@ -18,17 +18,17 @@ const Usuario = db.define('usuarios', {
     token: DataTypes.STRING,
     confirmado: DataTypes.BOOLEAN
 },{
-
 hooks:{
     beforeCreate: async function(usuario){
-    const salt= await bcrypt.genSalt(10)
-    usuario.password = await bcrypt.hash(usuario.password, salt);
+        const salt= await bcrypt.genSalt(10)
+        usuario.password = await bcrypt.hash(usuario.password, salt);
     }
 }
-
 })
+
 //metodos personalizados
-Usuarios.prototype.verificarPassword = function(password){
+Usuario.prototype.verificarPassword = function(password){
     return bcrypt.compareSync(password,this.password);
 }
+
 export default Usuario;
