@@ -3,7 +3,7 @@ import {check, validationResult} from 'express-validator'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import Usuario from '../models/Usuario.js'
-import{generarId}from '../helpers/tokens.js';
+import{generarJWT, generarId}from '../helpers/tokens.js';
 import{emailRegistro, emailOLvidePassword}from '../helpers/emails.js';
 import { UUID } from 'sequelize';
 
@@ -59,16 +59,17 @@ const autenticar = async (req, res) => {
     }
 
     // Autenticar al usuario
-    const token = jwt.sign({
-        nombre: 'Juan',
-        empresa: 'Codigo con Juan',
-        tecnologias: 'Node.js'
-    }, "palabrasupersecretaaaaa", {
-        expiresIn: '1d',
-        }
-    )
+    const token = generarJWT({id: usuario.id, nombre: usuario.nombre});
 
     console.log(token);
+
+    //Almacenar en un cookie
+
+    return res.cookie('_token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: true
+    }).redirect('/mis-propiedades')
 
 }
 const formularioRegistro = (req, res) => {  
