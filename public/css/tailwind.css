@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.leaflet-container a{
+    color: #FFF;
+}
