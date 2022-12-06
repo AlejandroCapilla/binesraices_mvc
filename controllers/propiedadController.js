@@ -17,7 +17,7 @@ if(!expresion.test(paginaActual)){
 
 try {
     //limites y offset
-    const limit=5
+    const limit=2
     const offset=((paginaActual*limit)-limit)
 
 const [propiedades, total] = await Promise.all([
