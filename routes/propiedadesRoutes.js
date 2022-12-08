@@ -13,7 +13,7 @@ router.post('/propiedades/crear',
 body('titulo').notEmpty().withMessage('El titulo del anuncio es obligatorio'),
 body('descripcion')
     .notEmpty().withMessage('La descripcion del anuncio es obligatorio')
-    .isLength({max: 255}).withMessage('La descrpcion es muy larga'),
+    .isLength({max: 1000}).withMessage('La descrpcion es muy larga'),
 body('categoria').isNumeric().withMessage('Selecciona una categoria'),
 body('precio').isNumeric().withMessage('Selecciona un rango de precios'),
 body('habitaciones').isNumeric().withMessage('Selecciona el numero de habitaciones'),
